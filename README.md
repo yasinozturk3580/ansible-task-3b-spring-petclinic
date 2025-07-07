@@ -1,5 +1,5 @@
 # ansible-task-3b-spring-petclinic
-Spring PetClinic Sample Application
+java/Spring PetClinic Sample Application
 #####
  Task -  Install Spring  PetClinic  Sample  application:
 
