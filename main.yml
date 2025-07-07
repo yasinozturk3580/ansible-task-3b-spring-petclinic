@@ -1,0 +1,70 @@
+- hosts: all
+  become: true
+  vars:
+    petclinic_repo: https://github.com/spring-projects/spring-petclinic.git
+    petclinic_dir: /spring
+
+  tasks:
+    - name: Install required packages
+      yum:
+        name:
+          - java-1.8.0-openjdk
+          - maven
+          - git
+          - firewalld
+        state: present
+        update_cache: yes
+
+    - name: Ensure firewalld is running and enabled
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Open port 8080/tcp in firewall
+      firewalld:
+        port: 8080/tcp
+        permanent: true
+        state: enabled
+        immediate: yes
+
+    - name: Clone Spring Petclinic repository
+      git:
+        repo: "{{ petclinic_repo }}"
+        dest: "{{ petclinic_dir }}"
+        version: main
+        force: no
+        update: yes
+
+    - name: Build Spring Petclinic application
+      command: mvn package
+      args:
+        chdir: "{{ petclinic_dir }}"
+      environment:
+        MAVEN_OPTS: "-Dmaven.test.skip=true"
+      register: build_result
+      changed_when: "'BUILD SUCCESS' in build_result.stdout"
+
+    - name: Run Petclinic application
+      shell: "nohup java -jar target/*.jar --server.port=8080 &"
+      args:
+        chdir: "{{ petclinic_dir }}"
+      async: 60
+      poll: 0
+      register: petclinic_run
+      changed_when: false
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
