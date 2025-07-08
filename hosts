@@ -1,4 +1,4 @@
 [centos]
-vm1 ansible_host=137.184.145.129
+vm1 ansible_host=104.248.123.175
 
 
