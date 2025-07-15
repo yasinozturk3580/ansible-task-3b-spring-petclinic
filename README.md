@@ -45,7 +45,8 @@ Use:
 5 - ss -tulnp | grep :8080
 6 - kill -9 (pid number) Example = kill -9   59543   59525
 7 - create roles folder under ansible-task-3b-spring-petclinic
-  create folder roles/spring-petclinic
+  create folder roles
+  create folder spring-petclinic under roles folder 
   keep those folder 1-defaults (main.yml) 2-handlers (main.yml) 3- meta (main.yml) 4- tasks (main.yml) 5- vars (main.yml)
 
 
@@ -58,4 +59,5 @@ Use:
 
 <img width="1511" alt="Screenshot 2025-06-28 at 1 38 44 PM" src="https://github.com/user-attachments/assets/b6b90cc5-2665-4862-9e53-721e7dba44cb" />
 
+<img width="296" height="631" alt="Screenshot 2025-07-15 at 1 00 12 PM" src="https://github.com/user-attachments/assets/77348733-23ea-4638-b38f-fe51a0bd7d4c" />
 
