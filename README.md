@@ -59,6 +59,10 @@ Use:
 
 <img width="1511" alt="Screenshot 2025-06-28 at 1 38 44 PM" src="https://github.com/user-attachments/assets/b6b90cc5-2665-4862-9e53-721e7dba44cb" />
 
+
+
 <img width="290" height="555" alt="vsc playbook 1" src="https://github.com/user-attachments/assets/25808527-960b-42ea-a09b-2cce3f6203ba" />
+
+
 
 <img width="296" height="631" alt="vsc playbook 2" src="https://github.com/user-attachments/assets/9b4ea183-8d15-4be3-ace9-b1de8230633e" />
