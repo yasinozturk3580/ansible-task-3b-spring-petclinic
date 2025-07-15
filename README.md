@@ -44,6 +44,9 @@ Use:
 4 - if you wanna kill the process run those  commands on VM
 5 - ss -tulnp | grep :8080
 6 - kill -9 (pid number) Example = kill -9   59543   59525
+7 - create roles folder under ansible-task-3b-spring-petclinic
+  create folder roles/spring-petclinic
+  keep those folder 1-defaults (main.yml) 2-handlers (main.yml) 3- meta (main.yml) 4- tasks (main.yml) 5- vars (main.yml)
 
 
 
