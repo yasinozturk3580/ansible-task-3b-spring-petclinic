@@ -1,0 +1,16 @@
+# Default variables for the spring-petclinic role
+
+# Application configuration
+app_name: spring-petclinic
+app_version: 2.5.0
+app_port: 8080
+java_version: java-17-openjdk
+
+# Repository configuration
+repo_url: https://github.com/spring-projects/spring-petclinic.git
+
+# VM configuration
+vm_memory: 2048  # Minimum memory in MB
+vm_os: centos
+
+# Other default variables can be added here as needed.

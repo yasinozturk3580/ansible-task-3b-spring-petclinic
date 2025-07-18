@@ -1,7 +1,7 @@
 - hosts: all
   become: true
-  tasks:
 
+  pre_tasks:
     - name: Install openJDK and other packages
       yum:
         name:
@@ -12,57 +12,5 @@
         state: present
         update_cache: yes
 
-
-    - name: Clone Spring Petclinic repository
-      git:
-        repo: https://github.com/spring-projects/spring-petclinic.git
-        dest: /spring
-
-    
-    - name: Run Maven Wrapper
-      shell: ./mvnw package
-      args:
-        chdir: /spring
-        creates: /spring/target
-
-
-    - name: Start and enable firewalld
-      service:
-        name: firewalld
-        state: started
-        enabled: true
-
-    
-    
-    - name: Open port 8080/tcp in firewall
-      firewalld:
-        port: 8080/tcp
-        permanent: true
-        state: enabled
-        immediate: yes
-
-    
-    
-    - name: Start Spring Petclinic App
-      shell: pkill java; sleep 3; nohup java -jar target/spring-petclinic*.jar &
-      args:
-        chdir: /spring
-
-    
-
-   
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
+  roles:
+    - spring-petclinic

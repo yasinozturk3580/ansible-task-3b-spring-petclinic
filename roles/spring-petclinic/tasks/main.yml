@@ -1,0 +1,39 @@
+- name: Install Java
+  yum:
+    name: 
+      - java-17-openjdk
+      - java-17-openjdk-devel
+    state: present
+
+- name: Clone Spring PetClinic repository
+  git:
+    repo: https://github.com/spring-projects/spring-petclinic.git
+    dest: /opt/spring-petclinic
+    version: main
+    force: yes
+
+- name: Build Spring PetClinic application
+  command: ./mvnw package
+  args:
+    chdir: /opt/spring-petclinic
+
+- name: Start Spring PetClinic application
+  shell: nohup java -jar target/*.jar > /opt/spring-petclinic/nohup.out 2>&1 &
+  args:
+    chdir: /opt/spring-petclinic
+
+- name: Wait for Spring PetClinic to start
+  wait_for:
+    port: 8080
+    delay: 10
+    timeout: 180
+
+- name: Ensure Spring PetClinic is running
+  shell: ss -tulnp | grep :8080
+  register: check_process
+  failed_when: check_process.rc != 0
+
+- name: Kill Spring PetClinic process if needed
+  shell: pkill java; sleep 3; nohup java -jar target/spring-petclinic*.jar &
+  args:
+    chdir: /opt/spring-petclinic

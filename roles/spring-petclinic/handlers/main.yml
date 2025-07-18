@@ -1,0 +1,11 @@
+- name: Restart Spring PetClinic application
+  service:
+    name: spring-petclinic
+    state: restarted
+  when: spring_petclinic_changed
+
+- name: Reload Spring PetClinic application configuration
+  service:
+    name: spring-petclinic
+    state: reloaded
+  when: spring_petclinic_config_changed

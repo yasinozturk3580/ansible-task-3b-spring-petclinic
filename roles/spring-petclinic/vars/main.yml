@@ -1,0 +1,23 @@
+# Variables for Spring PetClinic Role
+
+# Define the version of the Spring PetClinic application
+spring_petclinic_version: "2.5.0"
+
+# Define the repository URL for the Spring PetClinic application
+spring_petclinic_repo: "https://github.com/spring-projects/spring-petclinic.git"
+
+# Define the Java version to be installed
+java_version: "java-17-openjdk"
+
+# Define the port on which the application will run
+spring_petclinic_port: 8080
+
+# Define the directory where the application will be cloned
+spring_petclinic_dir: "/opt/spring-petclinic"
+
+# Define the user that will run the application
+spring_petclinic_user: "springuser"
+
+# Define any additional environment variables needed for the application
+spring_petclinic_env:
+  - "SPRING_PROFILES_ACTIVE=default"
