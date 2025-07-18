@@ -33,8 +33,62 @@ Use:
 6 - ./mvnw package
 7 - java -jar target/*.jar
 8 - You can then access petclinic here: http://localhost:8080
-9 - ss -tulnp | grep :8080 =  it shows details about any process using TCP/UDP port 8080                                                                                                        
-10 - kill -9 = its used to forcefully terminate a process using its PID (Process ID) Example = kill -9   59543   59525
+9 - ss -tulnp | grep :8080 =  it shows details about any process using TCP/UDP port 8080                                                                                  10 - kill -9 = its used to forcefully terminate a process using its PID (Process ID) Example = kill -9   59543   59525
+
+### vsc playbook without roles..
+create 1-main.yml file ,2- hosts file 3- readme file
+#### main.yml
+ - hosts: all
+  become: true
+  tasks:
+
+    - name: Install openJDK and other packages
+      yum:
+        name:
+          - java-1.8.0-openjdk
+          - maven
+          - git
+          - firewalld
+        state: present
+        update_cache: yes
+
+
+    - name: Clone Spring Petclinic repository
+      git:
+        repo: https://github.com/spring-projects/spring-petclinic.git
+        dest: /spring
+
+    
+    - name: Run Maven Wrapper
+      shell: ./mvnw package
+      args:
+        chdir: /spring
+        creates: /spring/target
+
+
+    - name: Start and enable firewalld
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    
+    
+    - name: Open port 8080/tcp in firewall
+      firewalld:
+        port: 8080/tcp
+        permanent: true
+        state: enabled
+        immediate: yes
+
+    
+    
+    - name: Start Spring Petclinic App
+      shell: pkill java; sleep 3; nohup java -jar target/spring-petclinic*.jar &
+      args:
+        chdir: /spring
+
+   
 
 
 ### With VSC playbook.
@@ -56,6 +110,18 @@ Use:
 #  ansible  -i hosts  all  -m ping
 #  ansible-playbook  -i hosts  main.yml = testing playbook for playbook on vsc
 # rm -rf ( file or folder name ) : delete it
+
+
+
+
+
+
+
+
+
+
+
+
 
 <img width="1511" alt="Screenshot 2025-06-28 at 1 38 44 PM" src="https://github.com/user-attachments/assets/b6b90cc5-2665-4862-9e53-721e7dba44cb" />
 
